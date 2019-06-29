@@ -181,7 +181,7 @@ import urllib
 
 # DBTITLE 1,Create MLflow Experiment
 #Check if experiment exists
-# if __name__ == "__main__":
+if __name__ == "__main__":
   if not any(experiment.name ==experiment_name for experiment in mlflowclient.list_experiments()):
     experiment_id= mlflowclient.create_experiment(experiment_name, artifact_location="dbfs:"+ artifact_mountpoint +"/" + artifacts_folder)
     mlflow.set_experiment(experiment_name)
