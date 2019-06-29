@@ -14,7 +14,7 @@ import urllib
 
 # DBTITLE 1, Download AdultCensusIncome.csv from Azure CDN. This file has 32,561 rows.
 # Download AdultCensusIncome.csv from Azure CDN. This file has 32,561 rows.
-# if __name__ == "__main__":
+if __name__ == "__main__":
   basedataurl = "https://amldockerdatasets.azureedge.net"
   datafile = "AdultCensusIncome.csv"
   datafile_dbfs = os.path.join("/dbfs", datafile)
