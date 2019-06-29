@@ -1,0 +1,7 @@
+name: MlflowProject
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    command: "python MLFlowTracking.py"
