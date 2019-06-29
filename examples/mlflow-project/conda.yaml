@@ -1,0 +1,7 @@
+name: MlflowProject
+channels:
+  - defaults
+dependencies:
+  - python=3.6
+  - pip:
+    - mlflow>=1.0
