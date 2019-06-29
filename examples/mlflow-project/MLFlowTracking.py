@@ -14,7 +14,7 @@ import urllib
 
 # DBTITLE 1, Download AdultCensusIncome.csv from Azure CDN. This file has 32,561 rows.
 # Download AdultCensusIncome.csv from Azure CDN. This file has 32,561 rows.
-if __name__ == "__main__":
+# if __name__ == "__main__":
   basedataurl = "https://amldockerdatasets.azureedge.net"
   datafile = "AdultCensusIncome.csv"
   datafile_dbfs = os.path.join("/dbfs", datafile)
@@ -28,7 +28,7 @@ if __name__ == "__main__":
 # COMMAND ----------
 
 # Create a Spark dataframe out of the csv file.
-if __name__ == "__main__":
+# if __name__ == "__main__":
   data_all = sqlContext.read.format('csv').options(header='true', inferSchema='true', ignoreLeadingWhiteSpace='true', ignoreTrailingWhiteSpace='true').load(datafile)
   print("({}, {})".format(data_all.count(), len(data_all.columns)))
   data_all.printSchema()
@@ -36,7 +36,7 @@ if __name__ == "__main__":
 # COMMAND ----------
 
 #renaming columns
-if __name__ == "__main__":
+# if __name__ == "__main__":
   columns_new = [col.replace("-", "_") for col in data_all.columns]
   data_all = data_all.toDF(*columns_new)
   data_all.printSchema()
@@ -44,7 +44,7 @@ if __name__ == "__main__":
 # COMMAND ----------
 
 #ensure that you see a table with 5 rows and various columns
-if __name__ == "__main__":
+# if __name__ == "__main__":
   display(data_all.limit(5))
 
 # COMMAND ----------
@@ -55,7 +55,7 @@ if __name__ == "__main__":
 
 # Choose feature columns and the label column.
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
   label = "income"
   xvars = set(data_all.columns) - {label}
 
@@ -77,7 +77,7 @@ if __name__ == "__main__":
 # COMMAND ----------
 
 # Write the train and test data sets to intermediate storage
-if __name__ == "__main__":
+# if __name__ == "__main__":
   train_data_path = "AdultCensusIncomeTrain"
   test_data_path = "AdultCensusIncomeTest"
 
@@ -94,7 +94,7 @@ if __name__ == "__main__":
 
 # COMMAND ----------
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
   import pprint
   import numpy as np
 
@@ -107,7 +107,7 @@ if __name__ == "__main__":
 # COMMAND ----------
 
 #get the train and test datasets
-if __name__ == "__main__":
+# if __name__ == "__main__":
   train = spark.read.parquet(train_data_path)
   test = spark.read.parquet(test_data_path)
 
@@ -122,7 +122,7 @@ if __name__ == "__main__":
 
 # COMMAND ----------
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
   label = "income"
   dtypes = dict(train.dtypes)
   dtypes.pop(label)
@@ -155,7 +155,7 @@ if __name__ == "__main__":
 # COMMAND ----------
 
 # DBTITLE 1,Initialize MLflow
-if __name__ == "__main__":
+# if __name__ == "__main__":
   import mlflow
   from mlflow.tracking import *
 
@@ -181,7 +181,7 @@ if __name__ == "__main__":
 
 # DBTITLE 1,Create MLflow Experiment
 #Check if experiment exists
-if __name__ == "__main__":
+# if __name__ == "__main__":
   if not any(experiment.name ==experiment_name for experiment in mlflowclient.list_experiments()):
     experiment_id= mlflowclient.create_experiment(experiment_name, artifact_location="dbfs:"+ artifact_mountpoint +"/" + artifacts_folder)
     mlflow.set_experiment(experiment_name)
@@ -194,7 +194,7 @@ if __name__ == "__main__":
 # COMMAND ----------
 
 # DBTITLE 1,Train the model with MLflow Tracking
-if __name__ == "__main__":
+# if __name__ == "__main__":
   import numpy as np
   import os
   import shutil
