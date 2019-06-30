@@ -27,6 +27,8 @@ else:
 # COMMAND ----------
 
 # Create a Spark dataframe out of the csv file.
+import pyspark
+spark = pyspark.sql.SparkSession.builder.getOrCreate()
 data_all = spark.read.format('csv').options(header='true', inferSchema='true', ignoreLeadingWhiteSpace='true', ignoreTrailingWhiteSpace='true').load(datafile)
 print("({}, {})".format(data_all.count(), len(data_all.columns)))
 data_all.printSchema()
