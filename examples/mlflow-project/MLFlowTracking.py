@@ -27,6 +27,8 @@ else:
 # COMMAND ----------
 
 # Create a Spark dataframe out of the csv file.
+
+#Explicitly create spark session. MLflow requires it.
 import pyspark
 spark = pyspark.sql.SparkSession.builder.getOrCreate()
 data_all = spark.read.format('csv').options(header='true', inferSchema='true', ignoreLeadingWhiteSpace='true', ignoreTrailingWhiteSpace='true').load(datafile)
@@ -43,7 +45,7 @@ data_all.printSchema()
 # COMMAND ----------
 
 #ensure that you see a table with 5 rows and various columns
-display(data_all.limit(5))
+data_all.limit(5). show() #NOTE: use show() instead of display() to avoid display' is not defined error at MLflow project run
 
 # COMMAND ----------
 
@@ -166,7 +168,7 @@ if not any(mount.mountPoint ==artifact_mountpoint for mount in dbutils.fs.mounts
           mount_point = artifact_mountpoint,
           extra_configs = {"fs.azure.account.key."+ storage_account + ".blob.core.windows.net":storage_access_key})  
 
-display(dbutils.fs.mounts())
+# display(dbutils.fs.mounts())
 
 # COMMAND ----------
 
