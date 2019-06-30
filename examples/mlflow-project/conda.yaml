@@ -7,3 +7,4 @@ dependencies:
   - py4j
   - pip:
     - mlflow>=1.0
+    - DBUtils
