@@ -1,9 +1,0 @@
-name: MlflowProject
-channels:
-  - defaults
-dependencies:
-  - python=3.6
-  - pyspark
-  - py4j
-  - pip:
-    - mlflow>=1.0
