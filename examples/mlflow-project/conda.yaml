@@ -6,4 +6,9 @@ dependencies:
   - pyspark
   - py4j
   - pip:
+<<<<<<< HEAD
     - mlflow>=1.0
+=======
+    - mlflow>=1.0
+    - pyspark
+>>>>>>> 33d37704ae9537fb29152f3b8f2a39c6e8881aee
