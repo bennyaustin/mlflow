@@ -2,9 +2,8 @@ name: MlflowProject
 channels:
   - defaults
 dependencies:
-  - python=3.6
+  - python=3.5
   - pyspark
   - py4j
   - pip:
     - mlflow>=1.0
-    - DBUtils
