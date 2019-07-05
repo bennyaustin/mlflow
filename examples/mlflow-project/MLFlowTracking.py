@@ -151,7 +151,7 @@ assembler = VectorAssembler(inputCols=featureCols, outputCol="features")
 # DBTITLE 1,Initialize MLflow
 import mlflow
 from mlflow.tracking import *
-import DBUtils
+from com.databricks import *
 
 #Instantiate MlflowClient
 mlflowclient= MlflowClient() 
