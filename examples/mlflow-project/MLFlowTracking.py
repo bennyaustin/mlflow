@@ -152,32 +152,32 @@ assembler = VectorAssembler(inputCols=featureCols, outputCol="features")
 import mlflow
 from mlflow.tracking import *
 
-dbutils=dbutils()
-
 #Instantiate MlflowClient
 mlflowclient= MlflowClient() 
 
 experiment_name="/Shared/MLFlow/IncomePrediction"
 artifacts_folder="IncomePrediction"
 
-secret_scope="dbvault"
-storage_account="storageg2"
-storage_access_key= dbutils.secrets.get(secret_scope,"storageg2_key")
-artifact_mountpoint="/mnt/artifact"
+# Disabling Azure Storage as MLflow can't recognize dbutils
+# secret_scope="dbvault"
+# storage_account="storageg2"
+# storage_access_key= dbutils.secrets.get(secret_scope,"storageg2_key")
+# artifact_mountpoint="/mnt/artifact"
 
-if not any(mount.mountPoint ==artifact_mountpoint for mount in dbutils.fs.mounts()):
-  dbutils.fs.mount( source = "wasbs://ml-artifacts@" + storage_account + ".blob.core.windows.net",
-          mount_point = artifact_mountpoint,
-          extra_configs = {"fs.azure.account.key."+ storage_account + ".blob.core.windows.net":storage_access_key})  
+# if not any(mount.mountPoint ==artifact_mountpoint for mount in dbutils.fs.mounts()):
+#   dbutils.fs.mount( source = "wasbs://ml-artifacts@" + storage_account + ".blob.core.windows.net",
+#           mount_point = artifact_mountpoint,
+#           extra_configs = {"fs.azure.account.key."+ storage_account + ".blob.core.windows.net":storage_access_key})  
 
-# display(dbutils.fs.mounts())
+# # display(dbutils.fs.mounts())
 
 # COMMAND ----------
 
 # DBTITLE 1,Create MLflow Experiment
 #Check if experiment exists
 if not any(experiment.name ==experiment_name for experiment in mlflowclient.list_experiments()):
-  experiment_id= mlflowclient.create_experiment(experiment_name, artifact_location="dbfs:"+ artifact_mountpoint +"/" + artifacts_folder)
+  # experiment_id= mlflowclient.create_experiment(experiment_name, artifact_location="dbfs:"+ artifact_mountpoint +"/" + artifacts_folder)
+  experiment_id= mlflowclient.create_experiment(experiment_name)
   mlflow.set_experiment(experiment_name)
 else:
   experiment_id =mlflowclient.get_experiment_by_name(experiment_name).experiment_id
