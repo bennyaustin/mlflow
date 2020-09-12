@@ -197,7 +197,7 @@ model_name = "AdultCensus.mml"
 model_dbfs = os.path.join("/dbfs", model_name)
 
 # Regularization Rates - 
-regs = [0.000001,0.00001,0.0001, 0.001, 0.01, 0.1]
+regs = [0.00001,0.0001, 0.001, 0.01, 0.1]
 
 # try a bunch of regularization rate in a Logistic Regression model
 for reg in regs:
